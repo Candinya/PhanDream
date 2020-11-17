@@ -1,0 +1,13 @@
+# Settings
+interval: # How many minutes before requesting new feed items
+
+bot:
+  token: # Set your telegram token here (from @botfather)
+  chat: # Send to which channel / chat ? Use '@Username' or 'chatid' to express it.
+  internal: # How many seconds before sending a new pic
+
+feed:
+  - type: pixiv
+    url: # Your pixiv subscribe feed URL (from RssHub)
+  - type: yandere
+    url: # Your yandere subscribe feed URL (from Rsshub)

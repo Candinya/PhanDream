@@ -1,0 +1,30 @@
+{
+  "name": "phandream",
+  "version": "1.0.0",
+  "description": "Sending RSS-subscribed pictures to telegram.",
+  "main": "bot.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Candinya/PhanDream.git"
+  },
+  "keywords": [
+    "rss",
+    "telegram",
+    "nodejs"
+  ],
+  "author": "Candinya",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/Candinya/PhanDream/issues"
+  },
+  "homepage": "https://github.com/Candinya/PhanDream#readme",
+  "dependencies": {
+    "got": "^11.8.0",
+    "js-yaml": "^3.14.0",
+    "rss-parser": "^3.9.0"
+  }
+}
