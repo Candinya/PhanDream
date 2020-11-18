@@ -5,7 +5,7 @@ interval: # How many minutes before requesting new feed items
 bot:
   token: # Set your telegram token here (from @botfather)
   chat: # Send to which channel / chat ? Use '@Username' or 'chatid' to express it.
-  internal: # How many seconds before sending a new pic
+  interval: # How many seconds before sending a new pic
 
 feed:
   - type: pixiv
