@@ -47,25 +47,14 @@ const processors = {
 
                 // Get ready to post these pictures
                 const artworks = [...item.content.matchAll(picIdReg)];
-                if (artworks.length === 1) {
-                    // Single post
+                artworks.forEach((pic) => {
                     sendList.push({
-                        preview: `https://i.pximg.net/img-master/img/${pubTimeString}/${artworks[0][1]}_p0_master1200.${artworks[0][3]}`,
-                        pic: artworks[0][0],
-                        text: item.title,
-                        url: `https://www.pixiv.net/artworks/${artworks[0][1]}`
+                        preview: `https://i.pximg.net/img-master/img/${pubTimeString}/${pic[1]}_p${typeof pic[2] === 'undefined' ? 0 : pic[2] - 1}_master1200.${pic[3]}`,
+                        pic: pic[0],
+                        text: item.title + (typeof pic[2] === 'undefined' ? '' : ' - P' + pic[2]),
+                        url: `https://www.pixiv.net/artworks/${pic[1]}`
                     });
-                } else {
-                    // Multiple posts
-                    artworks.forEach((pic) => {
-                        sendList.push({
-                            preview: `https://i.pximg.net/img-master/img/${pubTimeString}/${pic[1]}_p${pic[2] - 1}_master1200.${pic[3]}`,
-                            pic: pic[0],
-                            text: item.title + ' - P' + pic[2],
-                            url: `https://www.pixiv.net/artworks/${pic[1]}`
-                        });
-                    });
-                }
+                });
             }
         });
         return newTimeStamp;
@@ -163,7 +152,8 @@ const checkRss = () => {
 
 const checkSendList = () => {
     if (sendList.length > 0) {
-        sendPic(sendList.pop());
+        // Send first item
+        sendPic(sendList.shift());
     }
 };
 
