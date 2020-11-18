@@ -1,4 +1,5 @@
 # Settings
+debug_mode: false
 interval: # How many minutes before requesting new feed items
 
 bot:

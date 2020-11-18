@@ -14,6 +14,15 @@ const rss = new RssParser();
 // Setup pictures send list
 const sendList = [];
 
+// Convert int into 2-char string
+const to2String = (intval) => {
+    let retstr = intval.toString();
+    if (retstr.length < 2) {
+        retstr = '0' + retstr;
+    }
+    return retstr;
+};
+
 // Configure processors
 const processors = {
     // Input: object data
@@ -34,7 +43,7 @@ const processors = {
                 }
                 // Japan : Tokyo GMT + 9
                 const pubTime_JP = new Date(pubTime.getTime() + 9 * 3600 * 1000);
-                const pubTimeString = `${pubTime_JP.getFullYear()}/${pubTime_JP.getMonth() + 1}/${pubTime_JP.getDate()}/${pubTime_JP.getHours()}/${pubTime_JP.getMinutes()}/${pubTime_JP.getSeconds()}`;
+                const pubTimeString = `${pubTime_JP.getUTCFullYear()}/${to2String(pubTime_JP.getUTCMonth() + 1)}/${to2String(pubTime_JP.getUTCDate())}/${to2String(pubTime_JP.getUTCHours())}/${to2String(pubTime_JP.getUTCMinutes())}/${to2String(pubTime_JP.getUTCSeconds())}`;
 
                 // Get ready to post these pictures
                 const artworks = [...item.content.matchAll(picIdReg)];
@@ -99,14 +108,14 @@ confData.feed.forEach((item) => {
             checklist.push({
                 url: item.url,
                 proc: processors.pixiv,
-                timestamp: Date.now()
+                timestamp: confData.debug_mode ? 0 : Date.now()
             });
             break;
         case 'yandere':
             checklist.push({
                 url: item.url,
                 proc: processors.yandere,
-                timestamp: Date.now()
+                timestamp: confData.debug_mode ? 0 : Date.now()
             });
             break;
         default:
@@ -146,7 +155,7 @@ const checkRss = () => {
             if (err) {
                 console.error(err);
             } else {
-                item.timestamp = item.proc(feed);
+                item.timestamp = item.proc(feed, item.timestamp);
             }
         });
     });
@@ -158,6 +167,9 @@ const checkSendList = () => {
     }
 };
 
-setInterval(checkRss, confData.interval * 60 * 1000);
-
-setInterval(checkSendList, confData.bot.interval * 1000);
+if (confData.debug_mode) {
+    checkRss();
+} else {
+    setInterval(checkRss, confData.interval * 60 * 1000);
+    setInterval(checkSendList, confData.bot.interval * 1000);
+}
