@@ -32,9 +32,9 @@ const processors = {
                     // Record latest post time
                     newTimeStamp = pubTime;
                 }
-                // Japan : Tokyo UTC + 9
-                const pubTime_JP = pubTime + 9 * 3600 * 1000;
-                const pubTimeString = `${pubTime_JP.getUTCFullYear()}/${pubTime_JP.getUTCMonth()}/${pubTime_JP.getUTCDay()}/${pubTime_JP.getUTCHours()}/${pubTime_JP.getUTCMinutes()}/${pubTime_JP.getUTCSeconds()}`;
+                // Japan : Tokyo GMT + 9
+                const pubTime_JP = new Date(pubTime.getTime() + 9 * 3600 * 1000);
+                const pubTimeString = `${pubTime_JP.getFullYear()}/${pubTime_JP.getMonth() + 1}/${pubTime_JP.getDate()}/${pubTime_JP.getHours()}/${pubTime_JP.getMinutes()}/${pubTime_JP.getSeconds()}`;
 
                 // Get ready to post these pictures
                 const artworks = [...item.content.matchAll(picIdReg)];
