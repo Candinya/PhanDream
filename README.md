@@ -1,4 +1,4 @@
-# PhanDream
+# PhanDream (V1, depreciated)
 
 > Sending RSS-subscribed pictures to telegram.
 

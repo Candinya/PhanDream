@@ -9,6 +9,4 @@ bot:
 
 feed:
   - type: pixiv
-    url: # Your pixiv subscribe feed URL (from RssHub)
-  - type: yandere
-    url: # Your yandere subscribe feed URL (from Rsshub)
+    url: # Your pixiv subscribe feed URL (from RssHub, https://rsshub.tour.ltd/pixiv/user/illustfollows)
